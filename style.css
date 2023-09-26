@@ -133,40 +133,24 @@ svg {
   }
 }
 
-.container {
-  /* this is the max width of a container (taken from the figma file */
-  --max-width: 1110px;
-  /* this is the padding on either side on your page */
-  --padding: 1rem;
-
-  /* will apply whichever property is smaller */
-  /* 100% - var(--padding) stops the content from sticking to the side of the screen at smaller screen sizes, in the figma file, you can see at smaller screen sizes there is a 16px (1 rem) padding on either side of the container, but you want it to be *2 so that it's on either side */
-  width: min(var(--max-width), 100% - (var(--padding) * 2));
-  /* this is essentially centering the content */
-  margin-inline: auto;
-}
-
-.even-columns {
-  display: grid;
-  gap: 1rem;
-}
-
-/* note: em is one of the only units that is consistent across all browsers when you are zooming in and out */
-/* 50em is for bigger screens */
-@media (min-width: 50em) {
-  .even-columns {
-    /* gives us the column layout */
-    grid-auto-flow: column;
-    /* gives us evenly sized columns, fr is a fractional unit, so this is saying each column will take up 1 part of the available space, which is why there are two equal columns*/
-    grid-auto-columns: 1fr;
-  }
-}
-
-/* general styling */
+/* GENERAL STYLING */
 body {
   font-size: var(--fs-body);
   font-family: var(--ff-body);
   color: var(--clr-primary-400);
+}
+
+/* we use the :not([class]) in order to not target the "Simplify how your team..." paragraph so the opacity of that does not drop */
+p:not([class]){
+  opacity: 0.7;
+  /* it's important to do a max-width here because you're saying to not get any smaller than the value you specify */
+  /* ch is a character unit */
+  max-width: 32ch;
+}
+
+/* since we want the paragraphs in the section with the lists to stretch further, so we tag on the data attribute */
+p[data-width="wide"] {
+  max-width: 42ch;
 }
 
 /* BUTTON */
@@ -317,6 +301,46 @@ body {
   border: 0 !important;
 }
 
+.container {
+  /* this is the max width of a container (taken from the figma file */
+  --max-width: 1110px;
+  /* this is the padding on either side on your page */
+  --padding: 1rem;
+
+  /* will apply whichever property is smaller */
+  /* 100% - var(--padding) stops the content from sticking to the side of the screen at smaller screen sizes, in the figma file, you can see at smaller screen sizes there is a 16px (1 rem) padding on either side of the container, but you want it to be *2 so that it's on either side */
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  /* this is essentially centering the content */
+  margin-inline: auto;
+}
+
+/* technique taken from Andy Bell, it chooses every sibling other than the first thing in the div */
+/* .flow > * + * {
+  outline: 3px solid lime;
+} */
+
+/* the benefit to this is that the specificity is 0 so if you want to change it elsewhere in the code, you can override it easily */
+/* notice how we do not select the first child because the first child stays in place, we just want the children to have spacing from the first child */
+:where(.flow > :not(:first-child)) {
+  /* this makes it so that if --flow-spacer is not defined, it will use 1em */
+  margin-top: var(--flow-spacer, 3em);
+}
+
+.even-columns {
+  display: grid;
+  gap: 1rem;
+}
+
+/* note: em is one of the only units that is consistent across all browsers when you are zooming in and out */
+/* 50em is for bigger screens */
+@media (min-width: 50em) {
+  .even-columns {
+    /* gives us the column layout */
+    grid-auto-flow: column;
+    /* gives us evenly sized columns, fr is a fractional unit, so this is saying each column will take up 1 part of the available space, which is why there are two equal columns*/
+    grid-auto-columns: 1fr;
+  }
+}
 
 .text-primary-400 {
   color: var(--clr-primary-400);
