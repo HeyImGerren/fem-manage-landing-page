@@ -284,7 +284,38 @@ p[data-width="wide"] {
   }
 }
 
+/* CTA: CALL TO ACTION */
+.cta { 
+  position: relative;
+  /* means it can't go behind the element itself, it creates a new stacking context */
+  isolation: isolate;
+  text-align: center;
+}
 
+/* the reason this is a pseudo element is because you normally can't change the opacity of a background image, but when it's within a pseudo element, you can do what you want*/
+.cta::before {
+  content: '';
+  /* position absolute and inset: 0 means this will cover the entire area */
+  position: absolute;
+  inset: 0;
+  /* the z-index means it'll be behind the content, but it's also behind the background image, so that's why there's the isolation: isolate in the .cta class */
+  z-index: -1;
+  /* here is how you insert multiple images in the background */
+  background-image: url('images/bg-tablet-pattern.svg'),
+    url('images/bg-tablet-pattern.svg');
+  /* this is how you change the position of the images, you just separate the coordinates with a comma, left is first image, right is second image */
+  background-position: -15rem -5rem, 80rem -42rem;
+  /* when there's room it looks like the image will repeat, so we stop that here */
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+
+/* fixing how the CTA looks on mobile */
+@media (min-width: 50em) {
+  .cta {
+    text-align: left;
+  }
+}
 
 /* Utility Classes */
 /* NOTE: because of the cascade, it is good to have your utility classes at the bottom of the styling sheet so that they always win out over the other styles that may override them */
@@ -314,18 +345,6 @@ p[data-width="wide"] {
   margin-inline: auto;
 }
 
-/* technique taken from Andy Bell, it chooses every sibling other than the first thing in the div */
-/* .flow > * + * {
-  outline: 3px solid lime;
-} */
-
-/* the benefit to this is that the specificity is 0 so if you want to change it elsewhere in the code, you can override it easily */
-/* notice how we do not select the first child because the first child stays in place, we just want the children to have spacing from the first child */
-:where(.flow > :not(:first-child)) {
-  /* this makes it so that if --flow-spacer is not defined, it will use 1em */
-  margin-top: var(--flow-spacer, 3em);
-}
-
 .even-columns {
   display: grid;
   gap: 1rem;
@@ -340,6 +359,29 @@ p[data-width="wide"] {
     /* gives us evenly sized columns, fr is a fractional unit, so this is saying each column will take up 1 part of the available space, which is why there are two equal columns*/
     grid-auto-columns: 1fr;
   }
+}
+
+.vertical-align-center {
+  align-items: center;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+/* for medium sized screens and up */
+@media (min-width: 50em) {
+  .justify-self-end-md {
+    justify-self: end;
+  }
+}
+
+/* technique taken from Andy Bell, it chooses every sibling other than the first thing in the div */
+/* the benefit to this is that the specificity is 0 so if you want to change it elsewhere in the code, you can override it easily */
+/* notice how we do not select the first child because the first child stays in place, we just want the children to have spacing from the first child */
+:where(.flow > :not(:first-child)) {
+  /* this makes it so that if --flow-spacer is not defined, it will use 1em */
+  margin-top: var(--flow-spacer, 3em);
 }
 
 .text-primary-400 {
