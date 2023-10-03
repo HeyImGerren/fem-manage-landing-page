@@ -178,6 +178,10 @@ p[data-width="wide"] {
   color: var(--clr-accent-400);
 }
 
+.button[data-shadow="none"] {
+  box-shadow: none;
+}
+
 .button:hover,
 .button:focus-visible {
   background-color: var(--clr-accent-300);
@@ -290,10 +294,73 @@ p[data-width="wide"] {
   --logo-color: var(--clr-neutral-100);
 }
 
+/* this will help us re-arrange the footer since it changes order in the smaller view */
+.primary-footer-wrapper {
+  display: grid;
+  gap: var(--size-700);
+  /* this is the footer layout when the site is displayed in mobile view */
+  grid-template-areas: 
+    'form'
+    'nav'
+    'logo-social';
+}
+
+/* here we are plugging in the pieces to the template so they arrange themselves accordingly at mobile view */
+.primary-footer-logo-social {
+  grid-area: logo-social;
+  /* we do this because the social logos are on top of the company logo in the mobile view  */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--size-700);
+}
+
+.primary-footer-nav {
+  grid-area: nav;
+}
+
+.primary-footer-form {
+  grid-area: form;
+  display: grid;
+  align-content: space-between;
+}
+
+.primary-footer form {
+  display: flex;
+  gap: var(--size-200);
+}
+
+input:where([type="text"], [type="email"]) {
+  border-radius: 100vw;
+  border: 0;
+  padding: var(--size-300) var(--size-400);
+}
+
+/* now we have to make the footer look correct at larger screen sizes */
+@media (min-width: 50em) {
+  .primary-footer-wrapper {
+    /* we have to change the layout at larger screens */
+    grid-template-areas: 'logo-social nav form';
+  }
+
+  .primary-footer-logo-social {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--size-700);
+  }
+}
+
+@media (max-width: 50em) {
+  .primary-footer-wrapper > * {
+    margin-inline: auto;
+  }
+}
+
 /* FOOTER NAVIGATION */
 .footer-nav {
   /* makes it so that the nav links in the footer display as two columns instead of one long list */
   columns: 2;
+  gap: clamp(var(--size-200), 30vw, var(--size-900));
 }
 
 .footer-nav a {
@@ -308,7 +375,7 @@ p[data-width="wide"] {
 /* SOCIAL LIST */
 .social-list {
   display: flex;
-  gap: var(--size-400);
+  gap: var(--size-600);
 }
 
 /* this is supposed to be the size of the mobile icons */
@@ -327,6 +394,10 @@ p[data-width="wide"] {
 
 /* the media query here is to make the icons smaller at desktop sizes */
 @media (min-width: 50em) {
+  .social-list {
+    gap: var(--size-400);
+  }
+
   .social-icon {
     width: var(--size-500);
   }
