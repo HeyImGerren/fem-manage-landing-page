@@ -278,9 +278,57 @@ p[data-width="wide"] {
     border: 0;
     padding: .5em;
   }
-  
+   
   .mobile-nav-toggle .icon-close {
     display: none;
+  }
+}
+
+/* FOOTER */
+/* this is here to make the logo in the footer white */
+.primary-footer {
+  --logo-color: var(--clr-neutral-100);
+}
+
+/* FOOTER NAVIGATION */
+.footer-nav {
+  /* makes it so that the nav links in the footer display as two columns instead of one long list */
+  columns: 2;
+}
+
+.footer-nav a {
+  color: var(--clr-neutral-100);
+  text-decoration: none;
+}
+
+.footer-nav a:is(:hover, :focus) {
+  color: var(--clr-accent-400);
+}
+
+/* SOCIAL LIST */
+.social-list {
+  display: flex;
+  gap: var(--size-400);
+}
+
+/* this is supposed to be the size of the mobile icons */
+.social-icon {
+  width: var(--size-600);
+  /* the svgs are too tall, so we have to set the aspect-ratio to 1 to get them to be the correct height, it works well because they are squares, but the way it works is width/height so that means if aspect-ratio was 1/0.5 then the height would be half of the width */
+  aspect-ratio: 1;
+  /* we deleted the fill in the social-icons.svg file so we could add in our own fill here */
+  fill: var(--clr-neutral-100);
+}
+
+/* this is how you target the icons inside of the list to create the hover color change effect */
+.social-list a:is(:hover, :focus) .social-icon {
+  fill: var(--clr-accent-400);
+}
+
+/* the media query here is to make the icons smaller at desktop sizes */
+@media (min-width: 50em) {
+  .social-icon {
+    width: var(--size-500);
   }
 }
 
