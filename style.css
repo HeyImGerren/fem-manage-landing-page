@@ -436,6 +436,91 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
+/* NUMBERED ITEMS */
+.numbered-items {
+  /* the reset is important because if you had multiple lists they would just keep incrementing */
+  /* the value "count" is just the name of our counter, you can name it anything you want */
+  counter-reset: count;
+  /* fit-content hits the max-content size, but when the screen gets too small it allows for line wraps */
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.numbered-items li {
+  counter-increment: count;
+}
+
+.numbered-items div {
+  display: grid;
+  /* you must make this position relative because the title will be position absolute */
+  position: relative;
+  align-items: center;
+  column-gap: var(--size-300);
+  /* this means that the first column (which is just the pill shape with the number is the minimum width of the content, then the title after takes the rest of the space */
+  grid-template-columns: min-content 1fr;
+}
+
+.numbered-items__title {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  line-height: 1;
+}
+
+.numbered-items__body {
+  /* makes it so that the paragraph takes up the proper width of the div */
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 30em) {
+  .numbered-items__body {
+    /* makes it so that the paragraph lines up with the title nicely instead of with the number pill shape */
+    grid-column: 2 / -1;
+  }
+}
+
+.numbered-items div::before,
+.numbered-items div::after {
+  /* height is 40px because that's how big it is in the figma file */
+  height: 40px;
+}
+
+/* this is the pseudo element for the orange pill with the number in it */
+.numbered-items div::before {
+  content: "0" counter(count);
+  display: flex;
+  align-items: center;
+  color: var(--clr-neutral-100);
+  font-weight: var(--fw-bold);
+  background-color: var(--clr-accent-400);
+  padding: 0 var(--size-500);
+  /* height: 40px; */
+  border-radius: 100vw;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+
+@media (max-width: 30em) {
+  /* this is just a pseudo-element that targets ONLY the orange in the background across the pill and title */
+  .numbered-items div::after {
+    --bg: var(--clr-accent-100);
+    content: "";
+    display: block;
+    /* sets the orange to be behind the numbered pill and the title */
+    z-index: -1;
+    /* the last 100vw is to square off the right hand side, it shoots off of the page so it looks squared off because you can't see the end where it rounds off */
+    border-radius: 100vw 0 0 100vw;
+    /* inset: 0 means top bottom left and right all have a margin of 0, which you want because you want it to apply to the whole line */
+    /* inset: 0 -100vw 0 0; */
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    /* the height is set to 40px because that is the height of the pill and we want it to always match */
+    /* height: 40px; */
+    /* this box shadow is here to fill in the gap at smaller screens on the right side so the orange shoots off the page, but since it's a box shadow it will not cause overflow since it is purely visual and contains no content */
+    box-shadow: 5em 0 0 var(--bg);
+    background: var(--bg);
+  }
+}
+
 /* Utility Classes */
 /* NOTE: because of the cascade, it is good to have your utility classes at the bottom of the styling sheet so that they always win out over the other styles that may override them */
 .visually-hidden {
@@ -455,11 +540,11 @@ input:where([type="text"], [type="email"]) {
   /* this is the max width of a container (taken from the figma file */
   --max-width: 1110px;
   /* this is the padding on either side on your page */
-  --padding: 1rem;
+  --container-padding: 1rem;
 
   /* will apply whichever property is smaller */
   /* 100% - var(--padding) stops the content from sticking to the side of the screen at smaller screen sizes, in the figma file, you can see at smaller screen sizes there is a 16px (1 rem) padding on either side of the container, but you want it to be *2 so that it's on either side */
-  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  width: min(var(--max-width), 100% - (var(--container-padding) * 2));
   /* this is essentially centering the content */
   margin-inline: auto;
 }
@@ -501,6 +586,24 @@ input:where([type="text"], [type="email"]) {
 :where(.flow > :not(:first-child)) {
   /* this makes it so that if --flow-spacer is not defined, it will use 1em */
   margin-top: var(--flow-spacer, 3em);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-center p {
+  margin-inline: auto;
+}
+
+@media (max-width: 50em) {
+  .text-center-sm-only {
+    text-align: center;
+  }
+
+  .text-center-sm-only p {
+    margin-inline: auto;
+  }
 }
 
 .text-primary-400 {
@@ -571,6 +674,10 @@ input:where([type="text"], [type="email"]) {
 
 .padding-block-700 {
   padding-block: var(--size-700);
+}
+
+.margin-bottom-700 {
+  margin-block-end: var(--size-700);
 }
 
 .display-sm-none {
