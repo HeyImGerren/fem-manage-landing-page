@@ -12,3 +12,25 @@ navToggle.addEventListener('click', () => {
   primaryNav.toggleAttribute("data-visible");
   primaryHeader.toggleAttribute("data-overlay");
 });
+
+// code for the slider taken from https://a11yslider.js.org
+// const slider = new A11YSlider(document.querySelector('.slider'), {
+//   adaptiveHeight: false,
+//   dots: true,
+// });
+
+const slider = new A11YSlider(document.querySelector('.slider'), {
+  adaptiveHeight: false,
+  dots: true,
+  centerMode: true,
+  // hides the previous/next slide buttons
+  arrows: false,
+  // the numbers here refer to pixel sizes for the screen, here is where we specify what we do and do not want displayed
+  responsive: {
+    // we customized the breakpoints here to fit how we coded the media queries for the website
+    480: {
+      dots: false, // dots enabled 1280px and up
+      // arrows: true,
+    }
+  }
+});
