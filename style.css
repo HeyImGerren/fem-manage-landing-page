@@ -96,7 +96,10 @@ html:focus-within {
 
 html,
 body {
-  height: 100%;
+  /* changed this to min-height so the blobs don't move with the scrolling */
+  min-height: 100%;
+  /* we added this in later on in part 10 because the shape by the sales points was causing overflow */
+  overflow-x: hidden;
 }
 
 /* Set core body defaults, took out min-height because of the above code we added in height: 100% */
@@ -637,7 +640,7 @@ input:where([type="text"], [type="email"]) {
   background: var(--clr-accent-400);
 }
 
-/* IMAGE WITH BLOB BG */
+/* HERO IMAGE */
 @media (max-width: 47em) {
   .hero__image {
     /* position: relative; */
@@ -667,6 +670,32 @@ input:where([type="text"], [type="email"]) {
   /* at larger screen sizes, this ensures the blob in the back is only the width of the image it is placed behind (the graphs) */
   .hero__image::before {
     width: 45%;
+  }
+}
+
+/* SALES POINTS */
+.sales-points__blob {
+  position: relative;
+}
+/* this is the second blob image in the background */
+.sales-points__blob::before {
+  content: url("images/bg-tablet-pattern.svg");
+  zoom: 40%;
+  position: absolute; 
+  z-index: -1;
+  left: 70%;
+  bottom: 120%;
+  width: 100px;
+}
+
+@media (min-width: 47em) {
+  /* at bigger screens we want the blob to move to the left of the screen */
+  .sales-points__blob::before {
+    zoom: 70%;
+    z-index: -1;
+    left: -500px;
+    top: 42%;
+    width: 100px;
   }
 }
 
