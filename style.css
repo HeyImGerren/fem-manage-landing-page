@@ -60,7 +60,7 @@
 }
 
 /* big screens? */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   :root {
     --fs-body: var(--fs-500);
     --fs-primary-heading: var(--fs-900);
@@ -235,7 +235,7 @@ p[data-width="wide"] {
   color: var(--clr-accent-400);
 }
 
-@media (max-width: 50em) {
+@media (max-width: 47em) {
   .primary-navigation {
     display: none; 
     
@@ -338,7 +338,7 @@ input:where([type="text"], [type="email"]) {
 }
 
 /* now we have to make the footer look correct at larger screen sizes */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .primary-footer-wrapper {
     /* we have to change the layout at larger screens */
     grid-template-areas: 'logo-social nav form';
@@ -351,7 +351,7 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
-@media (max-width: 50em) {
+@media (max-width: 47em) {
   .primary-footer-wrapper > * {
     margin-inline: auto;
   }
@@ -394,7 +394,7 @@ input:where([type="text"], [type="email"]) {
 }
 
 /* the media query here is to make the icons smaller at desktop sizes */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .social-list {
     gap: var(--size-400);
   }
@@ -431,7 +431,7 @@ input:where([type="text"], [type="email"]) {
 }
 
 /* fixing how the CTA looks on mobile */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .cta {
     text-align: left;
   }
@@ -560,7 +560,7 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .slider > * {
     width: 35%;
   }
@@ -621,6 +621,39 @@ input:where([type="text"], [type="email"]) {
   background: var(--clr-accent-400);
 }
 
+/* IMAGE WITH BLOB BG */
+@media (max-width: 47em) {
+  .hero__image {
+    /* position: relative; */
+    /* order sets the order to lay out an item in a flex or grid container */
+    order: -1;
+  }  
+}
+
+.hero__image::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  width: 87%;
+  max-height: 70vh;
+  max-height: 70dvh;
+  /* allows you to specify the width-height ratio of the element's box, this is good for when the screen re-sizes because it'll always maintain the ratio */
+  aspect-ratio: 1 / 1.2;
+  background-image: url('images/bg-tablet-pattern.svg');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  /* border: 1px solid red; */
+}
+
+@media (min-width: 47em) {
+  /* at larger screen sizes, this ensures the blob in the back is only the width of the image it is placed behind (the graphs) */
+  .hero__image::before {
+    width: 45%;
+  }
+}
+
 /* Utility Classes */
 /* NOTE: because of the cascade, it is good to have your utility classes at the bottom of the styling sheet so that they always win out over the other styles that may override them */
 .visually-hidden {
@@ -656,7 +689,7 @@ input:where([type="text"], [type="email"]) {
 
 /* note: em is one of the only units that is consistent across all browsers when you are zooming in and out */
 /* 50em is for bigger screens */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .even-columns {
     /* gives us the column layout */
     grid-auto-flow: column;
@@ -674,7 +707,7 @@ input:where([type="text"], [type="email"]) {
 }
 
 /* for medium sized screens and up */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .justify-self-end-md {
     justify-self: end;
   }
@@ -696,7 +729,7 @@ input:where([type="text"], [type="email"]) {
   margin-inline: auto;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 47em) {
   .text-center-sm-only {
     text-align: center;
   }
@@ -780,12 +813,16 @@ input:where([type="text"], [type="email"]) {
   margin-block-end: var(--size-700);
 }
 
+.mx-auto {
+  margin-inline: auto;
+}
+
 .display-sm-none {
   display: none;
 }
 
 /* larger screens, currently working with nav bar for this one to have the get started button display differently */
-@media (min-width: 50em) {
+@media (min-width: 47em) {
   .display-md-inline-flex {
     display: inline-flex;
   }
