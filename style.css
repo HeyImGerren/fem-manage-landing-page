@@ -236,15 +236,23 @@ p[data-width="wide"] {
 }
 
 @media (max-width: 47em) {
+  /* targeting the data-overlay and giving it the z-index of 999 makes it so that the nav menu will appear above the rest of the content, even the ::before pseudo elements */
+  .primary-header[data-overlay] {
+    position: relative;
+    z-index: 999;
+  }
+
   .primary-navigation {
     display: none; 
-    
     /* we keep this as fixed you want it to stay fixed with the screen since the toggle button is also fixed */
     position: fixed;
+    /* z-index: 999; */
     padding: var(--size-700);
     /* inset is top | left and right | auto makes the bottom match the height of the element */
     inset: 7rem var(--size-400) auto;
     max-width: 25rem;
+    /* centers the pop up nav menu */
+    margin-inline: auto;
     margin-left: auto;
     background: var(--clr-neutral-100);
     border-radius: var(--size-100);
@@ -256,7 +264,7 @@ p[data-width="wide"] {
     content: '';
     position: fixed;
     inset: 0;
-    /* rgb (0 0 0 / 0) is transparent */
+    /* rgb (0 0 0 / 0) is transparent, then it does the gradient to the darker shade */
     background-image: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / 0.8));
   }
 
@@ -281,11 +289,19 @@ p[data-width="wide"] {
     cursor: pointer;
     background: transparent;
     border: 0;
-    padding: .5em;
+    padding: 0.5em;
+    width: 1.65rem;
+    aspect-ratio: 1;
+    background-image: url("images/icon-hamburger.svg");
+    /* using contain allows the image to not be cropped */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-   
-  .mobile-nav-toggle .icon-close {
-    display: none;
+  
+  /* here is the close icon "X" aria-expanded is set to true because when the hamburger menu icon is clicked, the icon should change to an "X" to close the menu */
+  .mobile-nav-toggle[aria-expanded="true"] {
+    background-image: url("images/icon-close.svg");
   }
 }
 
