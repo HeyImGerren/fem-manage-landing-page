@@ -315,72 +315,52 @@ p[data-width="wide"] {
 }
 
 /* this will help us re-arrange the footer since it changes order in the smaller view */
-.primary-footer-wrapper {
+.primary-footer__wrapper {
   display: grid;
   gap: var(--size-700);
+  justify-content: center;
+  align-items: start;
   /* this is the footer layout when the site is displayed in mobile view */
   grid-template-areas: 
     'form'
     'nav'
-    'logo-social';
+    'social'
+    'logo'
+    'copyright';
 }
 
+/* .primary-footer__wrapper > * {
+  margin-inline: auto;
+} */
+
+.primary-footer__logo {
+  grid-area: logo;
+}
+
+/* .primary-footer__form {
+  grid-area: form;
+} */
+
 /* here we are plugging in the pieces to the template so they arrange themselves accordingly at mobile view */
-.primary-footer-logo-social {
+/* we do this because the social logos are on top of the company logo in the mobile view  this was above display:flex  */
+/* .primary-footer-logo-social {
   grid-area: logo-social;
-  /* we do this because the social logos are on top of the company logo in the mobile view  */
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   gap: var(--size-700);
-}
-
-.primary-footer-nav {
-  grid-area: nav;
-}
-
-.primary-footer-form {
-  grid-area: form;
-  display: grid;
-  align-content: space-between;
-}
-
-.primary-footer form {
-  display: flex;
-  gap: var(--size-200);
-}
-
-input:where([type="text"], [type="email"]) {
-  border-radius: 100vw;
-  border: 0;
-  padding: var(--size-300) var(--size-400);
-}
-
-/* now we have to make the footer look correct at larger screen sizes */
-@media (min-width: 47em) {
-  .primary-footer-wrapper {
-    /* we have to change the layout at larger screens */
-    grid-template-areas: 'logo-social nav form';
-  }
-
-  .primary-footer-logo-social {
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--size-700);
-  }
-}
-
-@media (max-width: 47em) {
-  .primary-footer-wrapper > * {
-    margin-inline: auto;
-  }
-}
+} */
 
 /* FOOTER NAVIGATION */
+.primary-footer__nav-wrapper {
+  grid-area: nav;
+  margin-inline: auto;
+}
+
 .footer-nav {
   /* makes it so that the nav links in the footer display as two columns instead of one long list */
   columns: 2;
-  gap: clamp(var(--size-200), 30vw, var(--size-900));
+  gap: clamp(4rem, 10vw, 7rem);
 }
 
 .footer-nav a {
@@ -391,6 +371,50 @@ input:where([type="text"], [type="email"]) {
 .footer-nav a:is(:hover, :focus) {
   color: var(--clr-accent-400);
 }
+
+.primary-footer__form {
+  grid-area: form;
+  /* display: grid; */
+  /* align-content: space-between; */
+  display: flex;
+  gap: var(--size-200);
+}
+
+.primary-footer__copyright {
+  grid-area: copyright;
+  text-align: center;
+  opacity: 0.7;
+}
+
+input:where([type="text"], [type="email"]) {
+  border-radius: 100vw;
+  border: 0;
+  padding: var(--size-300) var(--size-500);
+  width: max(100%, 14rem);
+}
+
+/* now we have to make the footer look correct at larger screen sizes */
+/* we have to change the layout at larger screens */
+@media (min-width: 47em) {
+  .primary-footer__wrapper {
+    grid-template-areas: 
+      "logo nav form"
+      "social nav copyright";
+    grid-template-columns: min-content 1fr auto;
+  }
+
+  .primary-footer__copyright {
+    text-align: right;
+  }
+}
+
+@media (max-width: 47em) {
+  .primary-footer__wrapper > * {
+    margin-inline: auto;
+  }
+}
+
+
 
 /* SOCIAL LIST */
 .social-list {
@@ -407,11 +431,6 @@ input:where([type="text"], [type="email"]) {
   fill: var(--clr-neutral-100);
 }
 
-/* this is how you target the icons inside of the list to create the hover color change effect */
-.social-list a:is(:hover, :focus) .social-icon {
-  fill: var(--clr-accent-400);
-}
-
 /* the media query here is to make the icons smaller at desktop sizes */
 @media (min-width: 47em) {
   .social-list {
@@ -420,8 +439,15 @@ input:where([type="text"], [type="email"]) {
 
   .social-icon {
     width: var(--size-500);
+    max-width: revert;
   }
 }
+
+/* this is how you target the icons inside of the list to create the hover color change effect */
+.social-list a:is(:hover, :focus) .social-icon {
+  fill: var(--clr-accent-400);
+}
+
 
 /* CTA: CALL TO ACTION */
 .cta { 
@@ -856,6 +882,10 @@ input:where([type="text"], [type="email"]) {
 
 .margin-bottom-700 {
   margin-block-end: var(--size-700);
+}
+
+.margin-top-900 {
+  margin-block-start: var(--size-900);
 }
 
 .mx-auto {
