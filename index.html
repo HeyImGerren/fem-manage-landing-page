@@ -97,7 +97,7 @@
       </section>
 
       <!-- carousel is a component class so the | separates it from the utility classes. The | will not affect anything, its just a visual separation -->
-      <section class="carousel | padding-block-700 text-center">
+      <section class="carousel | padding-block-900 text-center">
         <h2 class="fs-secondary-heading fw-bold">What they've said</h2>
         <!-- Carousel Here -->
         <ul class="slider">
@@ -133,7 +133,7 @@
         <button class="button">Get Started</button>
       </section>
 
-      <section class="cta | bg-accent-400 text-neutral-100 padding-block-900">
+      <section class="cta | margin-top-900 padding-block-900 bg-accent-400 text-neutral-100 padding-block-900">
         <div class="container">
           <div class="even-columns vertical-align-center">
             <div>
@@ -151,10 +151,10 @@
       <div class="container">
         <!-- we need the primary-footer wrapper here in order to re-arrange the footer in the mobile view using grid and grid-template-areas -->
         <!-- NOTE: we remove the even columns class because we have so much custom stuff we have to do to the footer than it makes sense to remove it and apply other styles -->
-        <div class="primary-footer-wrapper">
-          <div class="primary-footer-logo-social">
-            <a href="#" aria-label="home">
-              <svg class="logo" width="146" height="24">
+        <div class="primary-footer__wrapper">
+          <!-- <div class="primary-footer-logo-social"> -->
+            <a class="primary-footer__logo" href="#" aria-label="home">
+              <svg class="logo | mx-auto" width="146" height="24">
                 <use xlink:href="images/logo.svg#logo"></use>
               </svg>
             </a>
@@ -185,8 +185,8 @@
                 </svg></a>
               </li>
             </ul>
-          </div>
-          <div class="primary-footer-nav">
+          <!-- </div> -->
+          <div class="primary-footer__nav-wrapper">
             <nav class="footer-nav">
               <ul class="flow" style="--flow-spacer: 1em" aria-label="Footer" role="list">
                 <li><a href="#">Home</a></li>
@@ -199,14 +199,14 @@
               </ul>
             </nav>
           </div>
-          <div class="primary-footer-form">
-            <form action="">
+          <!-- <div class="primary-footer-form"> -->
+            <form class="primary-footer__form" action="">
               <!-- if there is a button inside of a form, the type will automatically be "submit" -->
               <input type="email">
               <button class="button" data-shadow="none">Go</button>
             </form>
-            <p>Copyright 2020. All Rights Reserved</p>
-          </div>
+            <p class="primary-footer__copyright">Copyright 2020. All Rights Reserved</p>
+          <!-- </div> -->
         </div>
       </div>
     </footer>
