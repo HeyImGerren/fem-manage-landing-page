@@ -1,44 +1,28 @@
 :root {
-  /* darker orange */
   --clr-accent-500: hsl(12, 60%, 45%);
-  /* main orange */
   --clr-accent-400: hsl(12, 88%, 59%);
-  /* hover orange */
   --clr-accent-300: hsl(12, 88%, 75%);
-  /* lighter orange */
   --clr-accent-100: hsl(13, 100%, 96%);
-  /* blue */
   --clr-primary-400: hsl(228, 39%, 23%);
-  /* white */
   --clr-neutral-900: hsl(232, 12%, 13%);
   --clr-neutral-100: hsl(0, 0%, 100%);
   --clr-neutral-200: hsl(0, 0%, 97%);
   
-  /* font-family primary */
   --ff-primary: 'Be Vietnam Pro', sans-serif;
 
   --ff-body: var(--ff-primary);
   --ff-heading: var(--ff-primary);
 
-  /* font weights */
   --fw-regular: 400;
   --fw-semi-bold: 500;
   --fw-bold: 700; 
 
-  /* font size */
-  /* 13px */
   --fs-300: .8125rem;
-  /* 14px */
   --fs-400: .875rem; 
-  /* 15px */
   --fs-500: .9375rem;
-  /* 16px */
   --fs-600: 1rem;
-  /* 30px */
   --fs-700: 1.875rem;
-  /* 40px */
   --fs-800: 2.5rem;
-  /* 56px */
   --fs-900: 3.5rem;
 
   --fs-body: var(--fs-400);
@@ -47,7 +31,6 @@
   --fs-nav: var(--fs-500);
   --fs-button: var(--fs-300);
 
-  /* padding sizes for spacing between elements */
   --size-200: .25rem;
   --size-200: .5rem;
   --size-300: .75rem;
@@ -59,7 +42,6 @@
   --size-900: 5rem;
 }
 
-/* big screens? */
 @media (min-width: 47em) {
   :root {
     --fs-body: var(--fs-500);
@@ -69,51 +51,42 @@
   }
 }
 
-/* Box sizing rules */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin, this was modified to the below settings */
 * {
   margin: 0;
   padding: 0;
   font: inherit;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
 }
 
-/* Set core root defaults */
 html:focus-within {
   scroll-behavior: smooth;
 }
 
 html,
 body {
-  /* changed this to min-height so the blobs don't move with the scrolling */
   min-height: 100%;
-  /* we added this in later on in part 10 because the shape by the sales points was causing overflow */
   overflow-x: hidden;
 }
 
-/* Set core body defaults, took out min-height because of the above code we added in height: 100% */
 body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
 
-/* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Make images easier to work with, we added in svg to the list */
 img,
 picture,
 svg {
@@ -121,7 +94,6 @@ svg {
   display: block;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
@@ -137,43 +109,33 @@ svg {
   }
 }
 
-/* GENERAL STYLING */
 body {
   font-size: var(--fs-body);
   font-family: var(--ff-body);
   color: var(--clr-primary-400);
 }
 
-/* we use the :not([class]) in order to not target the "Simplify how your team..." paragraph so the opacity of that does not drop */
 p:not([class]){
   opacity: 0.7;
-  /* it's important to do a max-width here because you're saying to not get any smaller than the value you specify */
-  /* ch is a character unit */
   max-width: 32ch;
 }
 
-/* since we want the paragraphs in the section with listed numbers to stretch further, so we tag on the data attribute, we also use this for the carousel paragraphs */
 p[data-width="wide"] {
   max-width: 42ch;
 }
 
-/* BUTTON */
 .button {
-  /* good to display buttons as inline-flex in case you needed to add icons or something to them */
   display: inline-flex;
   cursor: pointer;
   text-decoration: none;
   border: 0;
-  /* 100vmax is a huge number that makes the button pill shaped */
   border-radius: 100vmax;
   padding: 1.25em 2.5em;
   font-weight: var(--fw-bold);
   font-size: var(--fs-button);
-  /* makes the top and bottom of the button shrink down a bit to look more center, but we need a little more padding when we do this so the top and bottom padding changed from 1em to 1.25em */
   line-height: 1;
   color: var(--clr-neutral-100);
   background-color: var(--clr-accent-400);
-  /* offset-x |  offset-y | blur-radius (larger the value, greater the blur) | spread-radius (negative value to shrink shadow inward) | color */
   box-shadow: 0 1.125em 1em -1em var(--clr-accent-500);
 }
 
@@ -197,7 +159,6 @@ p[data-width="wide"] {
   color: var(--clr-accent-300);
 }
 
-/* NAVIGATION */
 .primary-header {
   padding-top: var(--size-700);
 }
@@ -212,18 +173,12 @@ p[data-width="wide"] {
   display: none;
 }
 
-/* this goes outside the media query because the font size doesn't change between screen sizes */
 .nav-list {
   font-size: var(--fs-nav);
 }
 
 .nav-list {
   display: flex;
-  /* setting a clamp on the gap between the nav items makes it so that when the screen re-sizes, the nav items will not continue to grow infinitely, the spacing will always be controlled */
-  /* clamp(min, preferred value, max)*/
-  /* min: this is the lower bound in the range, if the preferred value is less than this value, the minimum value will be used */
-  /* preferred value: the preferred value is the expression whose value will be used as long as the page is between the min and max values */
-  /* max: this value will be used if preferred value is greater than this upper bound */
   gap: clamp(var(--size-400), 5vw, var(--size-700));
   font-weight: var(--fw-semi-bold);
 }
@@ -239,7 +194,6 @@ p[data-width="wide"] {
 }
 
 @media (max-width: 47em) {
-  /* targeting the data-overlay and giving it the z-index of 999 makes it so that the nav menu will appear above the rest of the content, even the ::before pseudo elements */
   .primary-header[data-overlay] {
     position: relative;
     z-index: 999;
@@ -247,14 +201,10 @@ p[data-width="wide"] {
 
   .primary-navigation {
     display: none; 
-    /* we keep this as fixed you want it to stay fixed with the screen since the toggle button is also fixed */
     position: fixed;
-    /* z-index: 999; */
     padding: var(--size-700);
-    /* inset is top | left and right | auto makes the bottom match the height of the element */
     inset: 7rem var(--size-400) auto;
     max-width: 25rem;
-    /* centers the pop up nav menu */
     margin-inline: auto;
     margin-left: auto;
     background: var(--clr-neutral-100);
@@ -263,11 +213,9 @@ p[data-width="wide"] {
   }
 
   .primary-header[data-overlay]::before {
-    /* You always need this content property with the pseudo element */
     content: '';
     position: fixed;
     inset: 0;
-    /* rgb (0 0 0 / 0) is transparent, then it does the gradient to the darker shade */
     background-image: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / 0.8));
   }
 
@@ -283,7 +231,6 @@ p[data-width="wide"] {
   }
 
   .mobile-nav-toggle {
-    /* needs to be position fixed because we changed the nav element to be a pseudo element so that the gradient would apply, if the display was not fixed, then we couldn't click it when the menu was toggled */
     display: block;
     position: fixed;
     top: var(--size-600);
@@ -296,31 +243,25 @@ p[data-width="wide"] {
     width: 1.65rem;
     aspect-ratio: 1;
     background-image: url("images/icon-hamburger.svg");
-    /* using contain allows the image to not be cropped */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
   }
   
-  /* here is the close icon "X" aria-expanded is set to true because when the hamburger menu icon is clicked, the icon should change to an "X" to close the menu */
   .mobile-nav-toggle[aria-expanded="true"] {
     background-image: url("images/icon-close.svg");
   }
 }
 
-/* FOOTER */
-/* this is here to make the logo in the footer white */
 .primary-footer {
   --logo-color: var(--clr-neutral-100);
 }
 
-/* this will help us re-arrange the footer since it changes order in the smaller view */
 .primary-footer__wrapper {
   display: grid;
   gap: var(--size-700);
   justify-content: center;
   align-items: start;
-  /* this is the footer layout when the site is displayed in mobile view */
   grid-template-areas: 
     'form'
     'nav'
@@ -329,36 +270,16 @@ p[data-width="wide"] {
     'copyright';
 }
 
-/* .primary-footer__wrapper > * {
-  margin-inline: auto;
-} */
-
 .primary-footer__logo {
   grid-area: logo;
 }
 
-/* .primary-footer__form {
-  grid-area: form;
-} */
-
-/* here we are plugging in the pieces to the template so they arrange themselves accordingly at mobile view */
-/* we do this because the social logos are on top of the company logo in the mobile view  this was above display:flex  */
-/* .primary-footer-logo-social {
-  grid-area: logo-social;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: var(--size-700);
-} */
-
-/* FOOTER NAVIGATION */
 .primary-footer__nav-wrapper {
   grid-area: nav;
   margin-inline: auto;
 }
 
 .footer-nav {
-  /* makes it so that the nav links in the footer display as two columns instead of one long list */
   columns: 2;
   gap: clamp(4rem, 10vw, 7rem);
 }
@@ -374,8 +295,6 @@ p[data-width="wide"] {
 
 .primary-footer__form {
   grid-area: form;
-  /* display: grid; */
-  /* align-content: space-between; */
   display: flex;
   gap: var(--size-200);
 }
@@ -393,8 +312,6 @@ input:where([type="text"], [type="email"]) {
   width: max(100%, 14rem);
 }
 
-/* now we have to make the footer look correct at larger screen sizes */
-/* we have to change the layout at larger screens */
 @media (min-width: 47em) {
   .primary-footer__wrapper {
     grid-template-areas: 
@@ -414,24 +331,17 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
-
-
-/* SOCIAL LIST */
 .social-list {
   display: flex;
   gap: var(--size-600);
 }
 
-/* this is supposed to be the size of the mobile icons */
 .social-icon {
   width: var(--size-600);
-  /* the svgs are too tall, so we have to set the aspect-ratio to 1 to get them to be the correct height, it works well because they are squares, but the way it works is width/height so that means if aspect-ratio was 1/0.5 then the height would be half of the width */
   aspect-ratio: 1;
-  /* we deleted the fill in the social-icons.svg file so we could add in our own fill here */
   fill: var(--clr-neutral-100);
 }
 
-/* the media query here is to make the icons smaller at desktop sizes */
 @media (min-width: 47em) {
   .social-list {
     gap: var(--size-400);
@@ -443,51 +353,36 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
-/* this is how you target the icons inside of the list to create the hover color change effect */
 .social-list a:is(:hover, :focus) .social-icon {
   fill: var(--clr-accent-400);
 }
 
-
-/* CTA: CALL TO ACTION */
 .cta { 
   position: relative;
-  /* means it can't go behind the element itself, it creates a new stacking context */
   isolation: isolate;
   text-align: center;
 }
 
-/* the reason this is a pseudo element is because you normally can't change the opacity of a background image, but when it's within a pseudo element, you can do what you want*/
 .cta::before {
   content: '';
-  /* position absolute and inset: 0 means this will cover the entire area */
   position: absolute;
   inset: 0;
-  /* the z-index means it'll be behind the content, but it's also behind the background image, so that's why there's the isolation: isolate in the .cta class */
   z-index: -1;
-  /* here is how you insert multiple images in the background */
   background-image: url('images/bg-tablet-pattern.svg'),
     url('images/bg-tablet-pattern.svg');
-  /* this is how you change the position of the images, you just separate the coordinates with a comma, left is first image, right is second image */
   background-position: -15rem -5rem, 80rem -42rem;
-  /* when there's room it looks like the image will repeat, so we stop that here */
   background-repeat: no-repeat;
   opacity: 0.1;
 }
 
-/* fixing how the CTA looks on mobile */
 @media (min-width: 47em) {
   .cta {
     text-align: left;
   }
 }
 
-/* NUMBERED ITEMS */
 .numbered-items {
-  /* the reset is important because if you had multiple lists they would just keep incrementing */
-  /* the value "count" is just the name of our counter, you can name it anything you want */
   counter-reset: count;
-  /* fit-content hits the max-content size, but when the screen gets too small it allows for line wraps */
   width: fit-content;
   margin-inline: auto;
 }
@@ -498,11 +393,9 @@ input:where([type="text"], [type="email"]) {
 
 .numbered-items div {
   display: grid;
-  /* you must make this position relative because the title will be position absolute */
   position: relative;
   align-items: center;
   column-gap: var(--size-300);
-  /* this means that the first column (which is just the pill shape with the number is the minimum width of the content, then the title after takes the rest of the space */
   grid-template-columns: min-content 1fr;
 }
 
@@ -513,24 +406,20 @@ input:where([type="text"], [type="email"]) {
 }
 
 .numbered-items__body {
-  /* makes it so that the paragraph takes up the proper width of the div */
   grid-column: 1 / -1;
 }
 
 @media (min-width: 30em) {
   .numbered-items__body {
-    /* makes it so that the paragraph lines up with the title nicely instead of with the number pill shape */
     grid-column: 2 / -1;
   }
 }
 
 .numbered-items div::before,
 .numbered-items div::after {
-  /* height is 40px because that's how big it is in the figma file */
   height: 40px;
 }
 
-/* this is the pseudo element for the orange pill with the number in it */
 .numbered-items div::before {
   content: "0" counter(count);
   display: flex;
@@ -539,46 +428,33 @@ input:where([type="text"], [type="email"]) {
   font-weight: var(--fw-bold);
   background-color: var(--clr-accent-400);
   padding: 0 var(--size-500);
-  /* height: 40px; */
   border-radius: 100vw;
   grid-row: 1 / 2;
   grid-column: 1 / 2;
 }
 
 @media (max-width: 30em) {
-  /* this is just a pseudo-element that targets ONLY the orange in the background across the pill and title */
   .numbered-items div::after {
     --bg: var(--clr-accent-100);
     content: "";
     display: block;
-    /* sets the orange to be behind the numbered pill and the title */
     z-index: -1;
-    /* the last 100vw is to square off the right hand side, it shoots off of the page so it looks squared off because you can't see the end where it rounds off */
     border-radius: 100vw 0 0 100vw;
-    /* inset: 0 means top bottom left and right all have a margin of 0, which you want because you want it to apply to the whole line */
-    /* inset: 0 -100vw 0 0; */
     grid-column: 1 / -1;
     grid-row: 1 / 2;
-    /* the height is set to 40px because that is the height of the pill and we want it to always match */
-    /* height: 40px; */
-    /* this box shadow is here to fill in the gap at smaller screens on the right side so the orange shoots off the page, but since it's a box shadow it will not cause overflow since it is purely visual and contains no content */
     box-shadow: 5em 0 0 var(--bg);
     background: var(--bg);
   }
 }
 
-/* SLIDER  https://a11yslider.js.org */
-/* these styles were taken from the website, then we added to them */
 .slider {
   display: flex;
   gap: var(--size-600);
   list-style: none;
 }
 
-/* this class gets injected into the DOM from the a11yslider code (you can observe this by inspecting the site, fortunately we can style it here */
 .a11y-slider-container {
   margin-block: var(--size-700);
-  /* creates a small margin on the left and right of the box */
   margin-inline: var(--size-400);
 }
 
@@ -591,12 +467,10 @@ input:where([type="text"], [type="email"]) {
 
 @media (min-width: 30em) {
   .slider {
-    /* creates a padding so that the slides will leave some space on the left of the page after the first slide */
     scroll-padding-inline: 25px;
   }
 
   .a11y-slider-container {
-    /* margin-block: var(--size-700); */
     margin-inline: 0;
   }
 
@@ -614,42 +488,30 @@ input:where([type="text"], [type="email"]) {
 .slider-content {
   border-radius: var(--size-100);
   padding: var(--size-700) var(--size-600) var(--size-600);
-  /* gives us the light grey background on each of the carousel items or items on the slider */
   background: var(--clr-neutral-200);
 }
 
 .slider img {
-  /* normally you don't use width on an image to re-size it, but we do in this case because it is a smaller img */
   width: var(--size-800);
-  /* this is position absolute because the position of the image does not change in the slider, positioning it absolute will also make it easy to remove it from the flow and make it tick out of the top of the box a little bit like it is styled in the figma file */
   position: relative;
-  /* this calculation is taking the width of the image, which is also the height because i think it's a square image, and dividing it by two moves it down by half of the height of the image which makes the img position halfway into the box */
   top: calc(var(--size-800) / 2);
-  /* centers the images, remember: setting the margin-inline to auto centers the element horizontally */
   margin-inline: auto;
 }
 
 .a11y-slider-dots {
   display: flex;
-  /* aligns the dots in the center */
   justify-content: center;
-  /* gives spacing to the dots on the top and bottom */
   margin-block: var(--size-500);
-  /* gap between the dots */
   gap: var(--size-300);
 }
 
-/* taken from the a11y site by using the inspect tool and taking their styles */
 .a11y-slider-dots li {
   display: block;
   width: 12px;
   height: 12px;
   padding: 0;
-  /* margin: 0 6px; */
-  /* color: #fff; */
 }
 
-/* taken from the a11y site by using the inspect tool and taking their styles */
 .a11y-slider-dots li button {
   display: block;
   font-size: 0;
@@ -661,16 +523,12 @@ input:where([type="text"], [type="email"]) {
   border-radius: 100%;
 }
 
-/* the active class is added to the button on click (observe this with the inspect tool) */
 .a11y-slider-dots li button.active {
   background: var(--clr-accent-400);
 }
 
-/* HERO IMAGE */
 @media (max-width: 47em) {
   .hero__image {
-    /* position: relative; */
-    /* order sets the order to lay out an item in a flex or grid container */
     order: -1;
   }  
 }
@@ -684,26 +542,22 @@ input:where([type="text"], [type="email"]) {
   width: 87%;
   max-height: 70vh;
   max-height: 70dvh;
-  /* allows you to specify the width-height ratio of the element's box, this is good for when the screen re-sizes because it'll always maintain the ratio */
   aspect-ratio: 1 / 1.2;
   background-image: url('images/bg-tablet-pattern.svg');
   background-repeat: no-repeat;
   background-position: bottom left;
-  /* border: 1px solid red; */
 }
 
 @media (min-width: 47em) {
-  /* at larger screen sizes, this ensures the blob in the back is only the width of the image it is placed behind (the graphs) */
   .hero__image::before {
     width: 45%;
   }
 }
 
-/* SALES POINTS */
 .sales-points__blob {
   position: relative;
 }
-/* this is the second blob image in the background */
+
 .sales-points__blob::before {
   content: url("images/bg-tablet-pattern.svg");
   zoom: 40%;
@@ -715,7 +569,6 @@ input:where([type="text"], [type="email"]) {
 }
 
 @media (min-width: 47em) {
-  /* at bigger screens we want the blob to move to the left of the screen */
   .sales-points__blob::before {
     zoom: 70%;
     z-index: -1;
@@ -725,8 +578,6 @@ input:where([type="text"], [type="email"]) {
   }
 }
 
-/* Utility Classes */
-/* NOTE: because of the cascade, it is good to have your utility classes at the bottom of the styling sheet so that they always win out over the other styles that may override them */
 .visually-hidden {
   position: absolute;
   position: absolute !important;
@@ -741,15 +592,9 @@ input:where([type="text"], [type="email"]) {
 }
 
 .container {
-  /* this is the max width of a container (taken from the figma file */
   --max-width: 1110px;
-  /* this is the padding on either side on your page */
   --container-padding: 1rem;
-
-  /* will apply whichever property is smaller */
-  /* 100% - var(--padding) stops the content from sticking to the side of the screen at smaller screen sizes, in the figma file, you can see at smaller screen sizes there is a 16px (1 rem) padding on either side of the container, but you want it to be *2 so that it's on either side */
   width: min(var(--max-width), 100% - (var(--container-padding) * 2));
-  /* this is essentially centering the content */
   margin-inline: auto;
 }
 
@@ -758,13 +603,9 @@ input:where([type="text"], [type="email"]) {
   gap: 1rem;
 }
 
-/* note: em is one of the only units that is consistent across all browsers when you are zooming in and out */
-/* 50em is for bigger screens */
 @media (min-width: 47em) {
   .even-columns {
-    /* gives us the column layout */
     grid-auto-flow: column;
-    /* gives us evenly sized columns, fr is a fractional unit, so this is saying each column will take up 1 part of the available space, which is why there are two equal columns*/
     grid-auto-columns: 1fr;
   }
 }
@@ -777,18 +618,13 @@ input:where([type="text"], [type="email"]) {
   justify-self: end;
 }
 
-/* for medium sized screens and up */
 @media (min-width: 47em) {
   .justify-self-end-md {
     justify-self: end;
   }
 }
 
-/* technique taken from Andy Bell, it chooses every sibling other than the first thing in the div */
-/* the benefit to this is that the specificity is 0 so if you want to change it elsewhere in the code, you can override it easily */
-/* notice how we do not select the first child because the first child stays in place, we just want the children to have spacing from the first child */
 :where(.flow > :not(:first-child)) {
-  /* this makes it so that if --flow-spacer is not defined, it will use 3em, keep in mind we in-line style the --flow-spacer in the html to whatever we want it to be */
   margin-top: var(--flow-spacer, 3em);
 }
 
@@ -856,7 +692,6 @@ input:where([type="text"], [type="email"]) {
 
 .fs-primary-heading {
   font-size: var(--fs-primary-heading);
-  /* fixes the wonky line height */
   line-height: 1.1;
 }
 
@@ -870,8 +705,6 @@ input:where([type="text"], [type="email"]) {
 .fs-500 { font-size: var(--fs-500); } 
 .fs-600 { font-size: var(--fs-600); } 
 
-/* top and bottom padding */
-/* this is the spacing between the blocks */
 .padding-block-900 {
   padding-block: var(--size-900);
 }
@@ -896,11 +729,8 @@ input:where([type="text"], [type="email"]) {
   display: none;
 }
 
-/* larger screens, currently working with nav bar for this one to have the get started button display differently */
 @media (min-width: 47em) {
   .display-md-inline-flex {
     display: inline-flex;
   }
 }
-
-/* test comments */

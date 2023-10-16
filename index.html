@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Manage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- this is for the slider, it was taken from the a11yslider.js.org website -->
     <link rel="stylesheet" href="https://unpkg.com/a11y-slider@latest/dist/a11y-slider.css" />
   </head>
   <body>
@@ -21,17 +20,10 @@
             <use xlink:href="images/logo.svg#logo"></use>
           </svg>
         </a>
-          <!-- aria controls tells the screen reader what the button controls when you click on it, the screen reader cannot see classes so you need to add an id to your nav -->
-          <!-- aria-expanded  is set to false initially when you first visit the site the navigation will be closed  -->
           <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-            <!-- since it's an image that just represents the menu, you can hide it from the screen reader -->
-            <!-- **** here we add the hamburger and close icons with CSS instead **** -->
-            <!-- <img class="icon-hamburger" src="images/icon-hamburger.svg" alt="" aria-hidden="true">
-            <img class="icon-close" src="images/icon-close.svg" alt="" aria-hidden="true"> -->
             <span class="visually-hidden">Menu</span>
           </button>
           <nav class="primary-navigation" id="primary-navigation">
-            <!-- role is "list" because when you have the style: none applied, screen readers sometimes don't list the items as a list. -->
             <ul aria-label="Primary" role="list" class="nav-list">
               <li><a href="#">Pricing</a></li>
               <li><a href="#">Product</a></li>
@@ -71,8 +63,6 @@
             <div>
               <ul class="numbered-items | flow" role="list">
                 <li>
-                  <!-- the reason for the div inside of the li is because you want the spacing from the title to the paragraph to be smaller than the --flow-spacer size
-                  you want it to still do the same style where it doesn't select the 1st child (heading), but you want want the space to be less than the normal flow -->
                   <div class="flow" style="--flow-spacer: 1em">
                     <h3 class="numbered-items__title | fs-600 fw-bold">Track company-wide progress</h3>
                     <p class="numbered-items__body" data-width="wide">See how your day-to-day tasks fit into the wider vision. Go from tracking progress at the milestone level all the way down to the smallest of details. never lost sight of the larger picture again.</p>
@@ -96,10 +86,8 @@
         </div>
       </section>
 
-      <!-- carousel is a component class so the | separates it from the utility classes. The | will not affect anything, its just a visual separation -->
       <section class="carousel | padding-block-900 text-center">
         <h2 class="fs-secondary-heading fw-bold">What they've said</h2>
-        <!-- Carousel Here -->
         <ul class="slider">
           <li>
             <img src="images/avatar-anisha.png" alt="">
@@ -149,10 +137,7 @@
   
     <footer class="primary-footer | padding-block-700 bg-neutral-900 text-neutral-100">
       <div class="container">
-        <!-- we need the primary-footer wrapper here in order to re-arrange the footer in the mobile view using grid and grid-template-areas -->
-        <!-- NOTE: we remove the even columns class because we have so much custom stuff we have to do to the footer than it makes sense to remove it and apply other styles -->
         <div class="primary-footer__wrapper">
-          <!-- <div class="primary-footer-logo-social"> -->
             <a class="primary-footer__logo" href="#" aria-label="home">
               <svg class="logo | mx-auto" width="146" height="24">
                 <use xlink:href="images/logo.svg#logo"></use>
@@ -185,7 +170,6 @@
                 </svg></a>
               </li>
             </ul>
-          <!-- </div> -->
           <div class="primary-footer__nav-wrapper">
             <nav class="footer-nav">
               <ul class="flow" style="--flow-spacer: 1em" aria-label="Footer" role="list">
@@ -199,18 +183,14 @@
               </ul>
             </nav>
           </div>
-          <!-- <div class="primary-footer-form"> -->
             <form class="primary-footer__form" action="">
-              <!-- if there is a button inside of a form, the type will automatically be "submit" -->
               <input type="email">
               <button class="button" data-shadow="none">Go</button>
             </form>
             <p class="primary-footer__copyright">Copyright 2020. All Rights Reserved</p>
-          <!-- </div> -->
         </div>
       </div>
     </footer>
-     <!-- taken from the a11slider.js.org website -->
     <script src="https://unpkg.com/a11y-slider@latest/dist/a11y-slider.js"></script>
     <script type="module" src="/main.js"></script>
   </body>
